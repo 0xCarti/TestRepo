@@ -1,5 +1,6 @@
 import datetime
 import os
+import sys
 
 display = [["O"] * 53 for _ in range(7)]
 dates = [["O"] * 53 for _ in range(7)]
@@ -12,6 +13,7 @@ def read_year_file(filename: str):
         with open(filename, 'r') as file:
             for line in file:
                 display.append(list(line.strip()))
+        print('Finished reading file.')
     except FileNotFoundError:
         print(f"The file {filename} was not found.")
 
@@ -35,8 +37,8 @@ def write_year_to_file(filename: str, date: str):
 
 
 def generate_year_array(start_row: int = 0, start_col: int = 0):
-    start_date = datetime.date(2021, 1, 1)
-    end_date = datetime.date(2021, 12, 31)
+    start_date = datetime.date(2000, 1, 1)
+    end_date = datetime.date(2000, 12, 31)
     date_of_range = [start_date + datetime.timedelta(days=delta) for delta in range((end_date - start_date).days + 1)]
     for date in date_of_range:
         display[start_row][start_col] = "X"
@@ -61,11 +63,13 @@ def display_menu():
     print(f'1: Write year to file.')
     print(f'2: Read design from year file.')
     print(f'3: Populate GitHub.')
+    print(f'4: Show Array.')
+    print(f'5: Exit')
     return input("Please enter a number: ")
 
 if __name__ == "__main__":
-    year_file = "2021.txt"
-    generate_year_array(5, 0)
+    year_file = "2000.txt"
+    generate_year_array(4, 0)
     while True:
         user_input = display_menu()
         if user_input == "1":
@@ -78,5 +82,12 @@ if __name__ == "__main__":
                         selected_dates.append(dates[i][j])
         elif user_input == "3":
             populate_github()
+        elif user_input == "4":
+            for i in range(len(display)):
+                for j in range(len(display[i])):
+                    print(display[i][j], end="")
+                print('')
+        elif user_input == "5":
+            sys.exit()
         else:
             print("Please enter an appropraite choice.")
