@@ -37,8 +37,8 @@ def write_year_to_file(filename: str, date: str):
 
 
 def generate_year_array(start_row: int = 0, start_col: int = 0):
-    start_date = datetime.date(2000, 1, 1)
-    end_date = datetime.date(2000, 12, 31)
+    start_date = datetime.date(2001, 1, 1)
+    end_date = datetime.date(2001, 12, 31)
     date_of_range = [start_date + datetime.timedelta(days=delta) for delta in range((end_date - start_date).days + 1)]
     date_of_range = [date for date in date_of_range if not (date.month == 2 and date.day == 29)]
     for date in date_of_range:
