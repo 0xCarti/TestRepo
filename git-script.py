@@ -40,6 +40,7 @@ def generate_year_array(start_row: int = 0, start_col: int = 0):
     start_date = datetime.date(2000, 1, 1)
     end_date = datetime.date(2000, 12, 31)
     date_of_range = [start_date + datetime.timedelta(days=delta) for delta in range((end_date - start_date).days + 1)]
+    date_of_range = [date for date in date_of_range if not (date.month == 2 and date.day == 29)]
     for date in date_of_range:
         display[start_row][start_col] = "X"
         dates[start_row][start_col] = str(date)
@@ -68,8 +69,8 @@ def display_menu():
     return input("Please enter a number: ")
 
 if __name__ == "__main__":
-    year_file = "2000.txt"
-    generate_year_array(4, 0)
+    year_file = "2001.txt"
+    generate_year_array(1, 0)
     while True:
         user_input = display_menu()
         if user_input == "1":
