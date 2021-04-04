@@ -54,7 +54,6 @@ def populate_github():
         write_year_to_file(f"date.txt", date)
         os.system(f'git add date.txt')
         os.system(f'git commit -a --date={date} --message={date}')
-        #os.system(f'git push test master')
         print(f'Commit made and pushed for {date}')
     os.system(f'git push test master')
 
