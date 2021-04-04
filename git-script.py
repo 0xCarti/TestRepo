@@ -28,6 +28,7 @@ def write_year_file(filename: str):
 def write_year_to_file(filename: str, date: str):
     try:
         with open(filename, 'w') as file:
+            print(f'Wrote to {date}')
             file.write(date + '\n')
     except Exception as e:
         print(f"An error occurred while writing to the file: {e}")
