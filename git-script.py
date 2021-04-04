@@ -49,12 +49,12 @@ def generate_year_array(start_row: int = 0, start_col: int = 0):
 
 def populate_github():
     print("starting git commits")
-    #os.system(f'git add 2021.txt')
+    os.system(f'git add 2021.txt')
     for date in selected_dates:
-        #write_year_to_file(f"{date}.txt", date)
-        #os.system(f'git add {date}.txt')
+        write_year_to_file(f"date.txt", date)
+        os.system(f'git add date.txt')
         os.system(f'git commit -a --date={date} --message={date}')
-        os.system(f'git push test master')
+        #os.system(f'git push test master')
         print(f'Commit made and pushed for {date}')
     os.system(f'git push test master')
 
