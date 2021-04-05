@@ -57,12 +57,26 @@ def populate_github():
         print(f'Commit made and pushed for {date}')
     os.system(f'git push test master')
 
+def display_menu():
+    print(f'1: Write year to file.')
+    print(f'2: Read design from year file.')
+    print(f'3: Populate GitHub.')
+    return input("Please enter a number: ")
+
 if __name__ == "__main__":
-    generate_year_array(5,0)
-    #write_year_file("2021.txt")
-    read_year_file("2021.txt")
-    for i in range(len(display)):
-        for j in range(len(display[i])):
-            if display[i][j] == "#":
-                selected_dates.append(dates[i][j])
-    populate_github()
+    year_file = "2021.txt"
+    generate_year_array(5, 0)
+    while True:
+        user_input = display_menu()
+        if user_input == "1":
+            write_year_file(year_file)
+        elif user_input == "2":
+            read_year_file(year_file)
+            for i in range(len(display)):
+                for j in range(len(display[i])):
+                    if display[i][j] == "#":
+                        selected_dates.append(dates[i][j])
+        elif user_input == "3":
+            populate_github()
+        else:
+            print("Please enter an appropraite choice.")
