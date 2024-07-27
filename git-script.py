@@ -1,7 +1,9 @@
 import datetime
+import os
 
 display = [["O"] * 53 for _ in range(7)]
 dates = [["O"] * 53 for _ in range(7)]
+selected_dates = []
 
 
 def read_year_file(filename: str):
@@ -23,6 +25,14 @@ def write_year_file(filename: str):
         print(f"An error occurred while writing to the file: {e}")
 
 
+def write_year_to_file(filename: str, date: str):
+    try:
+        with open(filename, 'w') as file:
+            file.write(date + '\n')
+    except Exception as e:
+        print(f"An error occurred while writing to the file: {e}")
+
+
 def generate_year_array(start_row: int = 0, start_col: int = 0):
     start_date = datetime.date(2021, 1, 1)
     end_date = datetime.date(2021, 12, 31)
@@ -36,9 +46,17 @@ def generate_year_array(start_row: int = 0, start_col: int = 0):
         else:
             start_row += 1
 
+def populate_github():
+    print("starting git commits")
+    os.system(f'git add 2021.txt')
+    for date in selected_dates:
+        write_year_to_file(f"{dates[i][j]}.txt", dates[i][j])
+        os.system(f'git add {dates[i][j]}.txt')
+        os.system(f'git commit --date={date} --message={date}')
+        os.system(f'git push test master')
+        print(f'Commit made and pushed for {date}')
 
 if __name__ == "__main__":
-    selected_dates = []
     generate_year_array(5,0)
     #write_year_file("2021.txt")
     read_year_file("2021.txt")
@@ -46,8 +64,4 @@ if __name__ == "__main__":
         for j in range(len(display[i])):
             if display[i][j] == "#":
                 selected_dates.append(dates[i][j])
-            print(display[i][j], end="")
-        print("")
-
-    for s_date in selected_dates:
-        print(s_date)
+    populate_github()
